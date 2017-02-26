@@ -1,0 +1,15 @@
+{
+  "name": "todolist-express",
+  "version": "1.0.0",
+  "description": "backend scripts for to do list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -i app.js"
+  },
+  "author": "mariosandoz",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
