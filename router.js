@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var todoController = require('./Http/Controller/todolistController');
 
 //middleware
 router.use(function timeLog (req, res, next) {
@@ -11,16 +12,21 @@ router.use(function timeLog (req, res, next) {
 })
 
 //incomplete tasks
-router.get('/',function(req,res){
-	res.send('Hello API');
+router.get('/',(req,res)=>{
+	todoController.helloWorld(req,res);
 });
 
 //incomplete tasks
 router.get('/tasks',function(req,res){
 	res.status(200).json({
 		'incomplete':['buying groceries','expressjs backend'],
-		'completed'	:['initial backend'],
+		'completed'	:['initial backend without mongo'],
 	});
+});
+
+//save new 
+router.post('/new',(req,res)=>{
+	todoController.newTask(req,res);
 });
 
 module.exports = router;
