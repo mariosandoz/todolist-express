@@ -29,4 +29,10 @@ router.post('/new',(req,res)=>{
 	todoController.newTask(req,res);
 });
 
+
+//get incomplete tasks
+router.get('/incomplete',(req,res)=>{
+	todoController.getIncompleteTask(req,res);
+});
+
 module.exports = router;

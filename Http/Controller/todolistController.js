@@ -8,6 +8,7 @@ var todoListController = {
 		var newTodoList = Todolist({
 			title:req.body.todo,
 			priority:"low",
+			completed:false,
 			deleted:false,
 		});
 
@@ -17,6 +18,27 @@ var todoListController = {
 		});
 		
 		res.redirect('/');
+	},
+	getIncompleteTask:function(req,res){
+		Todolist.find({'completed':false},(err,todolist)=>{
+			if(err) throw err;
+			var result = {
+				message:err,
+				todoresult:todolist
+			};
+			res.send(this.formatData(result));
+		});
+	},
+	formatData:function(arrData){
+		var title = [];
+
+		if(arrData.message == null){
+			arrData.todoresult.forEach((element)=>{
+				title.push(element.title);
+			});
+
+		}
+		return title;
 	}
 };
 
