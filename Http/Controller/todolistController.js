@@ -29,16 +29,34 @@ var todoListController = {
 			res.send(this.formatData(result));
 		});
 	},
+	getCompletedTasks:function(req,res){
+		Todolist.find({'completed':true},(err,todolist)=>{
+			if(err) throw err;
+			var result = {
+				message:err,
+				todoresult:todolist
+			};
+			res.send(this.formatData(result));
+		});
+	},
 	formatData:function(arrData){
 		var title = [];
 
 		if(arrData.message == null){
 			arrData.todoresult.forEach((element)=>{
-				title.push(element.title);
+				title.push({
+						id:element._id.toString(),
+						title:element.title});
 			});
-
 		}
 		return title;
+	},
+	update:function(req,res){
+		Todolist.findByIdAndUpdate(req.body.id,{'completed':req.body.status},(err,todolist)=>{
+			if(err) throw err;
+			console.log('Update task with id:'+req.body.id);
+		});
+		res.redirect('/');
 	}
 };
 

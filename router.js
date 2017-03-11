@@ -35,4 +35,13 @@ router.get('/incomplete',(req,res)=>{
 	todoController.getIncompleteTask(req,res);
 });
 
+//get completed tasks
+router.get('/completed',(req,res)=>{
+	todoController.getCompletedTasks(req,res);
+});
+
+router.post('/update',(req,res)=>{
+	todoController.update(req,res)
+});
+
 module.exports = router;
