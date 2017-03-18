@@ -44,4 +44,8 @@ router.post('/update',(req,res)=>{
 	todoController.update(req,res)
 });
 
+router.post('/delete',(req,res)=>{
+	todoController.delete(req,res)
+});
+
 module.exports = router;

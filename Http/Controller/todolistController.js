@@ -20,7 +20,7 @@ var todoListController = {
 		res.redirect('/');
 	},
 	getIncompleteTask:function(req,res){
-		Todolist.find({'completed':false},(err,todolist)=>{
+		Todolist.find({'completed':false,'deleted':false},(err,todolist)=>{
 			if(err) throw err;
 			var result = {
 				message:err,
@@ -30,7 +30,7 @@ var todoListController = {
 		});
 	},
 	getCompletedTasks:function(req,res){
-		Todolist.find({'completed':true},(err,todolist)=>{
+		Todolist.find({'completed':true,'deleted':false},(err,todolist)=>{
 			if(err) throw err;
 			var result = {
 				message:err,
@@ -55,6 +55,13 @@ var todoListController = {
 		Todolist.findByIdAndUpdate(req.body.id,{'completed':req.body.status},(err,todolist)=>{
 			if(err) throw err;
 			console.log('Update task with id:'+req.body.id);
+		});
+		res.redirect('/');
+	},
+	delete:function(req,res){
+		Todolist.findByIdAndUpdate(req.body.id,{'deleted':req.body.delete},(err,todolist)=>{
+			if(err) throw err;
+			console.log('Delete task with id:'+req.body.id);
 		});
 		res.redirect('/');
 	}
